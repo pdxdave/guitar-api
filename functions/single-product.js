@@ -1,5 +1,7 @@
 require('dotenv').config()
 const Airtable = require('airtable-node');
+
+
  
 const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
   .base(process.env.AIRTABLE_BASE)
@@ -16,6 +18,7 @@ const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
     if(id){
       try {
           const product = await airtable.retrieve(id)
+          console.log(product)
           if(product.error){
               return {
                   headers: {
@@ -30,7 +33,7 @@ const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
                   'Access-Control-Allow-Origin': '*'
               },
               statusCode: 200,
-              body: JSON.stringify(eatShit(product))
+              body: JSON.stringify(product)
           }
       } catch (error) {
           return {
