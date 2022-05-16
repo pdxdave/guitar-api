@@ -24,7 +24,7 @@ const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
                   'Access-Control-Allow-Origin': '*'
               },
               statusCode: 200,
-              body: JSON.stringify(product.fields)
+              body: JSON.stringify(product.fields, id)
           }
       } catch (error) {
           return {
