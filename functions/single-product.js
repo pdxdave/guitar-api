@@ -5,6 +5,12 @@ const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
   .base(process.env.AIRTABLE_BASE)
   .table(process.env.AIRTABLE_TABLE)
 
+  function eatShit(data){
+    return data.map(item => {
+        let image = item.image.url 
+        return {...item, image}
+    })
+  }
   exports.handler = async (event, context) => {
     const {id} = event.queryStringParameters 
     if(id){
@@ -24,7 +30,7 @@ const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
                   'Access-Control-Allow-Origin': '*'
               },
               statusCode: 200,
-              body: JSON.stringify(product)
+              body: JSON.stringify(eatShit(product))
           }
       } catch (error) {
           return {
